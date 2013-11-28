@@ -3,11 +3,11 @@
 <head>
 <meta charset=utf-8 />
 <title>Bull City Bikeways - Beta</title>
-  
+
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
   <script src='//api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js'></script>
   <link href='//api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css' rel='stylesheet' />
-  
+
   <style>
     body { margin:0; padding:0; }
     #map { position:fixed; top:0; bottom:0; width:75%; height: 100%; }
@@ -25,39 +25,28 @@
 <div id='help'>
   <div id='help-contents'>
     <h1>Bull City Bikeways</h1>
-    <h2><em>What am I looking at?</em></h2>
-    <p>You're looking at a map of bike routes used by folks in Durham, NC. All of the routes you see were entered by people like you - and we hope you'll add your route to the mix too!</p>
-
-    <h2><em>OK, but what's the point?</em></h2>
+    <p>This is a map of bike routes used by folks in Durham, NC. All of the routes you see were entered by people like you - and we hope you'll add your route to the mix too!</p>
+    <h2>Add your routes</h2>
+    <p>Getting your routes on the map can be done in two simple steps. The whole process should take 5-15 minutes:</p>
+    <ol>
+      <li><a href="#">Draw your route</a></li>
+      <li><a href="https://docs.google.com/forms/d/1GOGYquX2hP55MGCaQf-BhVTw1EMj4lcSnITGjslYIuE/viewform" target="_blank">Submit your data</a></li>
+    </ol>
+    <p>Repeat this process for as many routes as you care to submit. Having trouble with this process? Please e-mail us and we'll see what we can do.</p>
+    <p>If your route is already on the map, but you need to make a change go to the <a href="https://github.com/kostajh/bull-city-bikeways/tree/master/data" target="_blank">data page</a> for the site, find your entry, and click "Edit" (you'll need to sign up for a free account at Github to do this). Or e-mail us with your requested changes.</p>
+    <h2>Use cases</h2>
     <p>We think this map will be useful to you if:
       <ul>
         <li>you want to start cycling to work/school or for running errands but aren't sure about a good route to your destination</li>
         <li>you are already riding but are looking for a safer, alternate route</li>
-        <li>you want to partner up with someone for your commute</li> 
+        <li>you want to partner up with someone for your commute</li>
         <li>you're a transport planner who wants to know where people are cycling.</li>
       </ul>
-
-    <h2><em>How do I get my route on the map?</em></h2>
-    <p>Getting your route on the map can be done in two simple steps. The whole process should take 5-15 minutes:</p>
-    <h3>1. Draw your route</h3>
-    <ol>
-      <li>Go to <a href="http://geojson.io/#map=12/36.0083/-78.9687" target="_blank">GeoJSON.io</a></li>
-      <li>Click "OSM" at the bottom left corner of the page.</li>
-      <li>Click the "Polyline" tool on the left hand side of the page. Zoom in to your starting point, then click on the map to start drawing your route. Use the arrow keys on your keyboard to move the map around. Note: the line will not automatically follow a roadway (we don't have Google's resources, sorry). So you will have to click a lot to create a line that follows a curvy road. Please try to keep your line on the road, otherwise we can't post your route on the map.</li>
-      <li>Done drawing your route? Great! Click the "Save" icon at the top of the page. You should now see text at the top left of the page that looks like <code>anonymous/5809d4d2a044032744d7</code>. Don't lose this - you'll need that information in the next step.</li>
-    </ol>
-    <h3>2. Fill out a form</h3>
-    <ol>
-      <li>Go to the <a href="https://docs.google.com/forms/d/1GOGYquX2hP55MGCaQf-BhVTw1EMj4lcSnITGjslYIuE/viewform" target="_blank">data submission form</a>.</li>
-      <li>Fill out the form. You'll need the code from the previous step. Once you're done, press submit. We'll get your data posted onto the map within a few days! Thanks!</li>
-    </ol>
-    <p><em>Having trouble with this process? Please e-mail us and we'll see what we can do.</em>
-    <h2><em>My route is on the map but I need to make a change.</em></h2>
-    <p>No problem. Go to the <a href="https://github.com/kostajh/bull-city-bikeways/tree/master/data" target="_blank">data page</a> for the site, find your entry, and click "Edit" (you'll need to sign up for a free account at Github to do this). Or e-mail us with your requested changes.</p>
-    <h2><em>This site is terrible/great/could be better.</em></h2>
-    <p>Your suggestions and constructive criticism are most welcome. You can e-mail us, <a href="https://github.com/kostajh/bull-city-bikeways">file an issue in the bug tracker</a>, or <a href="https://github.com/kostajh/bull-city-bikeways">make the change yourself</a> - the site and its data are free and open source.</p>
-    <h2><em>Who made this?</h2></em>
-    <p>You did! This map wouldn't be anything without the users. The architecture was done by <a href="http://kostaharlan.net">Kosta Harlan</a>. Thanks to everyone who has contributed to this project by submitting their route. <a href="http://bicyclesafe.com/">Cycle safely</a>.</p>
+    </p>
+    <h2>Compliments and criticism</h2>
+    <p>Your suggestions and critiques are most welcome. You can e-mail us, <a href="https://github.com/kostajh/bull-city-bikeways/issues">file an issue in the bug tracker</a>, or <a href="https://github.com/kostajh/bull-city-bikeways">make the change yourself</a> - the site and its data are free and open source.</p>
+    <h2>Credits</h2>
+    <p>This map wouldn't be anything without all of you who have submitted data. The map, site architecture and maintenance is done by <a href="http://kostaharlan.net">Kosta Harlan</a>. Thanks to everyone who has contributed to this project by submitting their route. <a href="http://bicyclesafe.com/">Cycle safely</a>!</p>
   </div>
 </div>
 <script>
@@ -265,7 +254,7 @@ map.markerLayer.on('mouseover', function(e) {
 });
   map.markerLayer.on('mouseout', function(e) {
     e.layer.closePopup();
-}); 
+});
 </script>
 
 </body>
