@@ -1,261 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset=utf-8 />
-<title>Bull City Bikeways - Beta</title>
+---
+layout: home
+title:  "Bull City Bikeways - Beta"
+date:   2013-11-23 15:22:04
+---
 
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-  <script src='//api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js'></script>
-  <link href='//api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css' rel='stylesheet' />
-
-  <style>
-    body { margin:0; padding:0; }
-    #map { position:fixed; top:0; bottom:0; width:75%; height: 100%; }
-    #gravatar img { float: left; margin: 2px; }
-    #help { position:absolute; right: 0; top: 0; bottom:0; float:right; top:0; bottom:0; width:25%; height: 100%; }
-    #help-contents { padding:0 7% 7% 7%; font-family: 'Open Sans','Helvetica Neue',sans-serif; background-color: #fffffe; }
-    #help-contents p, li { font-size: 15px; }
-    #help-contents h2 { font-size: 18px; }
-    #help-contents h1 { text-transform: uppercase; font-weight: bold; }
-  </style>
-</head>
-<body>
-
-<div id='map'></div>
-<div id='help'>
-  <div id='help-contents'>
-    <h1>Bull City Bikeways</h1>
-    <p>This is a map of bike routes used by folks in Durham, NC. All of the routes you see were entered by people like you - and we hope you'll add your route to the mix too!</p>
-    <h2>Add your routes</h2>
-    <p>Getting your routes on the map can be done in two simple steps. The whole process should take 5-15 minutes:</p>
-    <ol>
-      <li><a href="#">Draw your route</a></li>
-      <li><a href="https://docs.google.com/forms/d/1GOGYquX2hP55MGCaQf-BhVTw1EMj4lcSnITGjslYIuE/viewform" target="_blank">Submit your data</a></li>
-    </ol>
-    <p>Repeat this process for as many routes as you care to submit. Having trouble with this process? Please e-mail us and we'll see what we can do.</p>
-    <p>If your route is already on the map, but you need to make a change go to the <a href="https://github.com/kostajh/bull-city-bikeways/tree/master/data" target="_blank">data page</a> for the site, find your entry, and click "Edit" (you'll need to sign up for a free account at Github to do this). Or e-mail us with your requested changes.</p>
-    <h2>Use cases</h2>
-    <p>We think this map will be useful to you if:
-      <ul>
-        <li>you want to start cycling to work/school or for running errands but aren't sure about a good route to your destination</li>
-        <li>you are already riding but are looking for a safer, alternate route</li>
-        <li>you want to partner up with someone for your commute</li>
-        <li>you're a transport planner who wants to know where people are cycling.</li>
-      </ul>
-    </p>
-    <h2>Compliments and criticism</h2>
-    <p>Your suggestions and critiques are most welcome. You can e-mail us, <a href="https://github.com/kostajh/bull-city-bikeways/issues">file an issue in the bug tracker</a>, or <a href="https://github.com/kostajh/bull-city-bikeways">make the change yourself</a> - the site and its data are free and open source.</p>
-    <h2>Credits</h2>
-    <p>This map wouldn't be anything without all of you who have submitted data. The map, site architecture and maintenance is done by <a href="http://kostaharlan.net">Kosta Harlan</a>. Thanks to everyone who has contributed to this project by submitting their route. <a href="http://bicyclesafe.com/">Cycle safely</a>!</p>
-  </div>
-</div>
-<script>
-  var map = L.mapbox.map('map', 'kostajh.gbn6pcib');
-  var geoJson = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        title: '<h2>Ride to work</h2>',
-        description: '<p><img src="http://www.gravatar.com/avatar/a66db4554497e4b94a51aca8b598cf56" /> Submitted by <strong>Kosta</strong>. This route is <strong>7.5</strong> miles and Kosta rated this a <strong>3</strong> for safety.</p>',
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -78.91436576843262,
-            35.987208808917345
-          ],
-          [
-            -78.91196250915527,
-            35.98713935914
-          ],
-          [
-            -78.91196250915527,
-            35.98387515064802
-          ],
-          [
-            -78.91053557395935,
-            35.983779653153704
-          ],
-          [
-            -78.9098596572876,
-            35.98333689053364
-          ],
-          [
-            -78.90893697738647,
-            35.983788334748866
-          ],
-          [
-            -78.90842199325562,
-            35.98271180966412
-          ],
-          [
-            -78.90837907791136,
-            35.981704724514906
-          ],
-          [
-            -78.90876531600952,
-            35.97848370210557
-          ],
-          [
-            -78.90871167182922,
-            35.97558380128718
-          ],
-          [
-            -78.90865802764893,
-            35.97466345120999
-          ],
-          [
-            -78.90828251838684,
-            35.97373440770142
-          ],
-          [
-            -78.90731692314148,
-            35.97251882024272
-          ],
-          [
-            -78.90653371810913,
-            35.97144214143283
-          ],
-          [
-            -78.90637278556824,
-            35.970808283330825
-          ],
-          [
-            -78.90635132789612,
-            35.9693147893243
-          ],
-          [
-            -78.90747785568237,
-            35.96618878018512
-          ],
-          [
-            -78.9076280593872,
-            35.965155433279946
-          ],
-          [
-            -78.90726327896118,
-            35.96420891038279
-          ],
-          [
-            -78.9064371585846,
-            35.96336658230036
-          ],
-          [
-            -78.90203833580017,
-            35.95881611852698
-          ],
-          [
-            -78.90097618103027,
-            35.9570444930208
-          ],
-          [
-            -78.90025734901428,
-            35.9550122854184
-          ],
-          [
-            -78.90028953552246,
-            35.953379533741
-          ],
-          [
-            -78.90108346939087,
-            35.95179885901038
-          ],
-          [
-            -78.90478491783142,
-            35.94346071067776
-          ],
-          [
-            -78.90751004219055,
-            35.936876426075166
-          ],
-          [
-            -78.9087438583374,
-            35.93533016889624
-          ],
-          [
-            -78.90855073928833,
-            35.935156430244376
-          ],
-          [
-            -78.90875458717346,
-            35.933453771248395
-          ],
-          [
-            -78.91093254089355,
-            35.92831951115165
-          ],
-          [
-            -78.9109969139099,
-            35.92520925574134
-          ],
-          [
-            -78.91146898269653,
-            35.9244620811897
-          ],
-          [
-            -78.91273498535156,
-            35.923428188481324
-          ],
-          [
-            -78.91345381736754,
-            35.922229203540276
-          ],
-          [
-            -78.91403317451477,
-            35.920482823389584
-          ],
-          [
-            -78.91592144966125,
-            35.917215859471
-          ],
-          [
-            -78.91734838485718,
-            35.915816932065646
-          ],
-          [
-            -78.91750931739807,
-            35.914861128929424
-          ],
-          [
-            -78.91623258590698,
-            35.90723166812853
-          ],
-          [
-            -78.9172089099884,
-            35.90553709806301
-          ],
-          [
-            -78.90901207923889,
-            35.90303428205359
-          ],
-          [
-            -78.90729546546936,
-            35.902721424486984
-          ],
-          [
-            -78.90091180801392,
-            35.90268666245877
-          ],
-          [
-            -78.89766097068785,
-            35.90266928143896
-          ]
-        ]
-      }
-    }
-  ]
-  };
-  map.markerLayer.setGeoJSON(geoJson);
-map.markerLayer.on('mouseover', function(e) {
-    e.layer.openPopup();
-});
-  map.markerLayer.on('mouseout', function(e) {
-    e.layer.closePopup();
-});
-</script>
-
-</body>
-</html>
+<h1>Bull City Bikeways</h1>
+<p>This is a map of bike routes used by folks in Durham, NC. All of the routes you see were entered by people like you - and we hope you'll add your route to the mix too!</p>
+<h2>Add your routes</h2>
+<p>Getting your routes on the map can be done in two simple steps. The whole process should take 5-15 minutes:</p>
+<ol>
+  <li><a href="#">Draw your route</a></li>
+  <li><a href="https://docs.google.com/forms/d/1GOGYquX2hP55MGCaQf-BhVTw1EMj4lcSnITGjslYIuE/viewform" target="_blank">Submit your data</a></li>
+</ol>
+<p>Repeat this process for as many routes as you care to submit. Having trouble with this process? Please e-mail us and we'll see what we can do.</p>
+<p>If your route is already on the map, but you need to make a change go to the <a href="https://github.com/kostajh/bull-city-bikeways/tree/master/data" target="_blank">data page</a> for the site, find your entry, and click "Edit" (you'll need to sign up for a free account at Github to do this). Or e-mail us with your requested changes.</p>
+<h2>Use cases</h2>
+<p>We think this map will be useful to you if:
+  <ul>
+    <li>you want to start cycling to work/school or for running errands but aren't sure about a good route to your destination</li>
+    <li>you are already riding but are looking for a safer, alternate route</li>
+    <li>you want to partner up with someone for your commute</li>
+    <li>you're a transport planner who wants to know where people are cycling.</li>
+  </ul>
+</p>
+<h2>Compliments and criticism</h2>
+<p>Your suggestions and critiques are most welcome. You can e-mail us, <a href="https://github.com/kostajh/bull-city-bikeways/issues">file an issue in the bug tracker</a>, or <a href="https://github.com/kostajh/bull-city-bikeways">make the change yourself</a> - the site and its data are free and open source.</p>
+<h2>Credits</h2>
+<p>This map wouldn't be anything without all of you who have submitted data. The map, site architecture and maintenance is done by <a href="http://kostaharlan.net">Kosta Harlan</a>. Thanks to everyone who has contributed to this project by submitting their route. <a href="http://bicyclesafe.com/">Cycle safely</a>!</p>
