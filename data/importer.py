@@ -2,25 +2,24 @@
 # Import route data from Google Docs and save as GeoJSON.
 
 import gspread
-from geojson import LineString, Feature, Point, FeatureCollection
+import json
 import os
 import configparser
 
+
 def setUp():
-    creds_filename = "config"
     try:
         config_filename = os.path.join(
-            os.path.dirname(__file__), creds_filename)
+            os.path.dirname(__file__), "config")
         config = configparser.ConfigParser()
         config.readfp(open(config_filename))
-        email = config.get('Google Account', 'email')
-        password = config.get('Google Account', 'password')
-        return email, password
+        return config.get('Google Account', 'email'), config.get(
+            'Google Account', 'password')
 
     except IOError:
-        msg = "Can't find %s for reading google account credentials. " \
-              "You can create it from %s.example in tests/ directory."
-        raise Exception(msg % (creds_filename, creds_filename))
+        msg = "Can't find 'config' for reading google account credentials. " \
+              "You can create it from config.example in data/ directory."
+        raise Exception(msg)
 
 # Get username/password from `config`
 email, password = setUp()
