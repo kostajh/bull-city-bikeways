@@ -15,6 +15,7 @@ def setUp():
             os.path.dirname(__file__), "config")
         config = configparser.ConfigParser()
         config.readfp(open(config_filename))
+        print('Loaded credentials for Google Account')
         return config.get('Google Account', 'email'), config.get(
             'Google Account', 'password')
 
@@ -31,6 +32,7 @@ def loadData():
     # Login with your Google account
     gc = gspread.login(email, password)
 
+    print('Loading form submissions')
     # Get submissions from Google Spreadsheets
     wks = gc.open_by_key("0AlZGBQh5vhE1dGFObVAtT0VKRjUxSUJjNnRaQlFIemc").sheet1
     return wks.get_all_values()[1:]
@@ -42,29 +44,34 @@ def updateGeoJson(geojson, row):
         row[1] = full name
         row[2] = email
         row[3] = privacy setting for name display
-        row[4] = unknown
+        row[4] = Deprecated (URL to GeoJSON gist)
         row[5] = purpose of trip
-        row[6] = unknown
+        row[6] = Deprecated (Safety ranking)
         row[7] = starting time
         row[8] = GeoJSON
-        row[9] = unknown
-        row[10] = notes
-        row[11] = duration
+        row[9] = Comments about this route
+        row[10] = How long does it take to ride?
     """
     properties = dict()
     properties['title'] = row[1]
     properties['description'] = row[9]
-    # TODO: Update properties
+    properties['type'] = row[5]
+    properties['name'] = row[1]
+    properties['starting_time'] = row[7]
+    properties['duration'] = row[10]
     geojson['features'][0]['properties'] = properties
     return json.dumps(geojson)
 
 
 def writeData(entries):
     """ Write geojson into `data` dir and update dictionary.json """
+    print('Processing entries')
     for entry in entries:
         if entry[0] is '':
             continue
         else:
+            print('Processing entry for %s submitted on %s' %
+                 (entry[1], entry[0]))
             date = entry[0].split(' ', 1)[0].replace("/", "-")
             firstname = entry[1].split(' ', 1)[0].lower()
             jsonhash = hashlib.sha256(entry[8].encode(
