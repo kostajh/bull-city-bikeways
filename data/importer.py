@@ -51,14 +51,27 @@ def updateGeoJson(geojson, row):
         row[8] = GeoJSON
         row[9] = Comments about this route
         row[10] = How long does it take to ride?
+        Example properties[metadata]:
+            <p>Submitted by <strong>{name}</strong> on <strong>{date}</strong>
+            </p><p><strong>{name}</strong> usually rides this route at
+            <strong>{start_time}</strong> for <strong>{purpose}</strong> and it
+            takes about <strong>{duration}</strong>.</p>
+            <p><strong>Comments:</strong> {comments}</p>
     """
     properties = dict()
+    name = row[1]
     properties['title'] = row[1]
     properties['description'] = row[9]
     properties['type'] = row[5]
     properties['name'] = row[1]
     properties['starting_time'] = row[7]
     properties['duration'] = row[10]
+    properties['metadata'] = '<p>Submitted by <strong>%s</strong> on \
+    <strong>%s</strong></p><p><strong>%s</strong> usually rides this route at \
+    <strong>%s</strong> for <strong>%s</strong> and it takes about <strong>%s \
+    </strong>.</p><p><strong>Comments:</strong>%s</p>' % (name, row[0], name,
+                                                          row[7], row[5],
+                                                          row[10], row[9])
     geojson['features'][0]['properties'] = properties
     return json.dumps(geojson)
 
@@ -76,7 +89,7 @@ def writeData(entries):
             firstname = entry[1].split(' ', 1)[0].lower()
             jsonhash = hashlib.sha256(entry[8].encode(
                 'utf-8')).hexdigest()[:16]
-            filename = "%s-%s-%s.geojson" % (date, firstname, jsonhash)
+            filename = "./data/%s-%s-%s.geojson" % (date, firstname, jsonhash)
             f = open(filename, 'w')
             geojson = updateGeoJson(json.loads(entry[8]), entry)
             f.write(geojson)
