@@ -68,6 +68,19 @@ def updateGeoJson(geojson, row):
     properties['name'] = row[1]
     properties['starting_time'] = row[7]
     properties['duration'] = row[10]
+    # Color coded routes.
+    if properties['type'] == 'Work':
+        color = 'red'
+    elif properties['type'] == 'Errands':
+        color = 'blue'
+    elif properties['type'] == 'School':
+        color = 'yellow'
+    elif properties['type'] == 'Fun':
+        color = 'green'
+    else:
+        color = 'purple'
+    # Set color
+    properties['color'] = color
     properties['metadata'] = '<img src="%s" id="gravatar"><p>Submitted by \
     <strong>%s</strong> on<strong>%s</strong></p><p><strong>%s</strong> \
     usually rides this route at <strong>%s</strong> for <strong>%s</strong>\
