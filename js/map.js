@@ -2,9 +2,12 @@ var map = L.mapbox.map('map', 'kostajh.gbn6pcib');
 function popUp(feature, layer) {
     layer.bindPopup(feature.properties.metadata);
 }
+
+var geoJson = new L.GeoJSON.AJAX(null, {onEachFeature:popUp});
 $.getJSON("./data/dictionary.json", function(data) {
   $.each(data, function(index,item){
-    var geoJson = new L.GeoJSON.AJAX("./data/" + data, {onEachFeature:popUp});
-    geoJson.addTo(map);
+    geoJson.addUrl(data);
   });
 });
+
+geoJson.addTo(map)

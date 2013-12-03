@@ -60,18 +60,22 @@ def updateGeoJson(geojson, row):
     """
     properties = dict()
     name = row[1]
+    gravatar = "http://www.gravatar.com/avatar/" + hashlib.md5(
+        row[2].lower().encode('utf-8')).hexdigest()
     properties['title'] = row[1]
     properties['description'] = row[9]
     properties['type'] = row[5]
     properties['name'] = row[1]
     properties['starting_time'] = row[7]
     properties['duration'] = row[10]
-    properties['metadata'] = '<p>Submitted by <strong>%s</strong> on \
-    <strong>%s</strong></p><p><strong>%s</strong> usually rides this route at \
-    <strong>%s</strong> for <strong>%s</strong> and it takes about <strong>%s \
-    </strong>.</p><p><strong>Comments:</strong>%s</p>' % (name, row[0], name,
-                                                          row[7], row[5],
-                                                          row[10], row[9])
+    properties['metadata'] = '<img src="%s" id="gravatar"><p>Submitted by \
+    <strong>%s</strong> on<strong>%s</strong></p><p><strong>%s</strong> \
+    usually rides this route at <strong>%s</strong> for <strong>%s</strong>\
+    and the trip takes about <strong>%s</strong>.</p><p><strong>Comments:\
+    </strong> %s </p>' % \
+        (gravatar, name, row[0], name,
+         row[7], row[5],
+         row[10], row[9])
     geojson['features'][0]['properties'] = properties
     return json.dumps(geojson)
 
@@ -89,9 +93,10 @@ def writeData(entries):
             firstname = entry[1].split(' ', 1)[0].lower()
             jsonhash = hashlib.sha256(entry[8].encode(
                 'utf-8')).hexdigest()[:16]
-            filename = "./data/%s-%s-%s.geojson" % (date, firstname, jsonhash)
+            filename = "%s-%s-%s.geojson" % (date, firstname, jsonhash)
             f = open(filename, 'w')
             geojson = updateGeoJson(json.loads(entry[8]), entry)
+            print('Updating geoJSON')
             f.write(geojson)
             f.close()
             # Update dictionary
@@ -100,7 +105,7 @@ def writeData(entries):
             f.close()
             f = open('dictionary.json', 'w')
             if filename not in data:
-                data.append(filename)
+                data.append("./data/%s" % filename)
                 print('Writing file: %s' % filename)
             f.write(json.dumps(data))
             f.close()

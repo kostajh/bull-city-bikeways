@@ -6,4 +6,4 @@
     #help-contents p, li { font-size: 15px; }
     #help-contents h2 { font-size: 18px; }
     #help-contents h1 { text-transform: uppercase; font-weight: bold; }
- 
+#gravatar { float: left; padding-right: 5px; padding-bottom: 5px; }
