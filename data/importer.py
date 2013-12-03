@@ -37,10 +37,26 @@ def loadData():
 
 
 def updateGeoJson(geojson, row):
-    """ Update the properties of the GeoJSON with Gdata values. """
-    data = geojson
-    # TODO.
-    return data
+    """ Update the properties of the GeoJSON with Gdata values.
+        row[0] = date
+        row[1] = full name
+        row[2] = email
+        row[3] = privacy setting for name display
+        row[4] = unknown
+        row[5] = purpose of trip
+        row[6] = unknown
+        row[7] = starting time
+        row[8] = GeoJSON
+        row[9] = unknown
+        row[10] = notes
+        row[11] = duration
+    """
+    properties = dict()
+    properties['title'] = row[1]
+    properties['description'] = row[9]
+    # TODO: Update properties
+    geojson['features'][0]['properties'] = properties
+    return json.dumps(geojson)
 
 
 def writeData(entries):
@@ -55,7 +71,7 @@ def writeData(entries):
                 'utf-8')).hexdigest()[:16]
             filename = "%s-%s-%s.geojson" % (date, firstname, jsonhash)
             f = open(filename, 'w')
-            geojson = updateGeoJson(entry[8], entry)
+            geojson = updateGeoJson(json.loads(entry[8]), entry)
             f.write(geojson)
             f.close()
             # Update dictionary
@@ -65,6 +81,7 @@ def writeData(entries):
             f = open('dictionary.json', 'w')
             if filename not in data:
                 data.append(filename)
+                print('Writing file: %s' % filename)
             f.write(json.dumps(data))
             f.close()
     return
