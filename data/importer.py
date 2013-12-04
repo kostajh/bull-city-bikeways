@@ -60,13 +60,16 @@ def updateGeoJson(geojson, row):
     """
     properties = dict()
     name = row[1]
+    first_name = name.split(' ', 1)[0]
     gravatar = "http://www.gravatar.com/avatar/" + hashlib.md5(
         row[2].lower().encode('utf-8')).hexdigest()
     properties['title'] = row[1]
     properties['description'] = row[9]
     properties['type'] = row[5]
     properties['name'] = row[1]
+    properties['date'] = row[0].split(' ', 1)[0].lower()
     properties['starting_time'] = row[7]
+    properties['opacity'] = 0.5
     properties['duration'] = row[10]
     # Color coded routes.
     if properties['type'] == 'Work':
@@ -84,9 +87,9 @@ def updateGeoJson(geojson, row):
     properties['metadata'] = '<img src="%s" id="gravatar"><p>Submitted by \
     <strong>%s</strong> on<strong>%s</strong></p><p><strong>%s</strong> \
     usually rides this route at <strong>%s</strong> for <strong>%s</strong>\
-    and the trip takes about <strong>%s</strong>.</p><p><strong>Comments:\
-    </strong> %s </p>' % \
-        (gravatar, name, row[0], name,
+    and the trip takes about <strong>%s</strong>.</p><p id="route-comments"> \
+    <strong>Comments:</strong> %s </p>' % \
+        (gravatar, name, properties['date'], first_name,
          row[7], row[5],
          row[10], row[9])
     geojson['features'][0]['properties'] = properties
@@ -96,6 +99,7 @@ def updateGeoJson(geojson, row):
 def writeData(entries):
     """ Write geojson into `data` dir and update dictionary.json """
     print('Processing entries')
+    data = list()
     for entry in entries:
         if entry[0] is '':
             continue
@@ -112,16 +116,14 @@ def writeData(entries):
             print('Updating geoJSON')
             f.write(geojson)
             f.close()
-            # Update dictionary
-            f = open('dictionary.json', 'r')
-            data = json.loads(f.read())
-            f.close()
-            f = open('dictionary.json', 'w')
-            if filename not in data:
-                data.append("./data/%s" % filename)
-                print('Writing file: %s' % filename)
-            f.write(json.dumps(data))
-            f.close()
+            # Add dictionary entry
+            print('Adding file to dictionary: %s' % filename)
+            data.append("./data/%s" % filename)
+
+    # Write to dictionary
+    f = open('dictionary.json', 'w')
+    f.write(json.dumps(data))
+    f.close()
     return
 
 # Load data.
