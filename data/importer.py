@@ -117,12 +117,12 @@ def writeData(entries):
             f.write(geojson)
             f.close()
             # Add dictionary entry
-            print('Adding file to dictionary: %s' % filename)
+            print('Adding file to dictionary object: %s' % filename)
             data.append("./data/%s" % filename)
 
     # Write to dictionary
     f = open('dictionary.json', 'w')
-    f.write(json.dumps(data))
+    f.write("dictionary = " + json.dumps(data))
     f.close()
     return
 

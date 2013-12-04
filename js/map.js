@@ -5,14 +5,11 @@ function popUp(feature, layer) {
 }
 
 function styleLayer(feature) {
-    return {color: feature.properties.color, opacity: .4};
+    return {
+      color: feature.properties.color,
+      opacity: feature.properties.opacity
+    };
 }
 
-var geoJson = new L.GeoJSON.AJAX(null, {onEachFeature:popUp, style:styleLayer});
-$.getJSON("./data/dictionary.json", function(data) {
-  $.each(data, function(index,item){
-    geoJson.addUrl(data);
-  });
-});
-
+var geoJson = new L.GeoJSON.AJAX(dictionary, {onEachFeature:popUp, style:styleLayer});
 geoJson.addTo(map)
