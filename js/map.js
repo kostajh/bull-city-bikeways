@@ -37,13 +37,12 @@ ds.fetch({
           L.geoJson(route, {onEachFeature:popUp, style:styleLayer}).addTo(map);
         }
         catch (e) {
-          // TODO: Handle errors.
-          alert('Failed to add data to map');
+          // Errors. In most cases, these are submissions that were deleted. But
+          // it's also possible that the GeoJSON was not decoded.
         }
       }
     },
   error : function() {
-    alert('Failed to load data');
     console.log("Are you sure you are connected to the internet?");
   }
 });
