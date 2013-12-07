@@ -2,3 +2,5 @@ name: Bull City Bikeways
 markdown: redcarpet
 pygments: true
 baseurl: /bull-city-bikeways
+site:
+  url: 'http://kostaharlan.net/bull-city-bikeways'
