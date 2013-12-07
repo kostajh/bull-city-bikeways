@@ -2,8 +2,19 @@
     #map { position:fixed; top:0; bottom:0; width:75%; height: 100%; }
     #gravatar img { float: left; margin: 2px; }
     #help { position:absolute; right: 0; top: 0; bottom:0; float:right; top:0; bottom:0; width:25%; height: 100%; }
-    .site, .post, #help-contents { padding:0 7% 7% 7%; font-family: 'Open Sans','Helvetica Neue',sans-serif; background-color: #fffffe; }
+    #help-contents { padding:0 7% 7% 7%; font-family: 'Open Sans', 'Helvetica Neue', sans-serif; background-color: #fffffe; }
     #help-contents p, li { font-size: 15px; }
     #help-contents h2 { font-size: 18px; }
     #help-contents h1 { text-transform: uppercase; font-weight: bold; }
 #gravatar { float: left; padding-right: 5px; padding-bottom: 5px; }
+
+.site {
+  width: 100%;
+  background-color: #fffffe;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.contents {
+  margin-left: 25%;
+  margin-right: 25%;
+}

@@ -72,10 +72,11 @@ function setProperties(row) {
 
 // Returns a string for displaying in the popup.
 function getMetadata(row) {
-  // TODO: Add gravatar.
   firstname = row.Name.split(' ')[0];
   date = row.Timestamp.split(' ')[0];
-  string = '<p>Submitted by <strong>' + firstname + '</strong> on <strong>' + date + '</strong></p>' + '<strong>' + firstname + '</strong> rides this route for <strong>' + row.Purpose + '</strong> and the trip takes about <strong>' + row.Duration + '</strong>.</p><p><strong>Comments:</strong> ' + row.Comments + '</strong>';
+  hash = md5(row.Email);
+  gravatar = "http://www.gravatar.com/avatar/" + hash;
+  string = '<img src="' + gravatar + '" id="gravatar"><p>Submitted by <strong>' + firstname + '</strong> on <strong>' + date + '</strong></p>' + '<strong>' + firstname + '</strong> rides this route for <strong>' + row.Purpose + '</strong> and the trip takes about <strong>' + row.Duration + '</strong>.</p><p><strong>Comments:</strong> ' + row.Comments + '</strong>';
   if (row.StartTime !== null) {
     string += '<p><strong>Typical starting time:</strong> ' + row.StartTime + '</p>';
   }
