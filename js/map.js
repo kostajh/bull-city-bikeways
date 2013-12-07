@@ -38,10 +38,12 @@ ds.fetch({
         }
         catch (e) {
           // TODO: Handle errors.
+          alert('Failed to add data to map');
         }
       }
     },
   error : function() {
+    alert('Failed to load data');
     console.log("Are you sure you are connected to the internet?");
   }
 });
