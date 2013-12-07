@@ -22,9 +22,9 @@ ds.fetch({
       for (i = 0; i < results.length; i++) {
         // Attempt to parse the JSON.
         try {
-          var route = JSON.parse(results[i].GeoJSONRaw);
+          var route = JSON.parse(results[i]['Enter the GeoJSON for your route']);
           // If Email isn't set, it's a deleted row.
-          if (route.Email === null) {
+          if (route['And your e-mail address?']=== null) {
             return;
           }
           // Loop through Features; someone may have submitted a route with
@@ -39,6 +39,7 @@ ds.fetch({
         catch (e) {
           // Errors. In most cases, these are submissions that were deleted. But
           // it's also possible that the GeoJSON was not decoded.
+          console.log('Error parsing data', e);
         }
       }
     },
@@ -65,21 +66,21 @@ function setProperties(row) {
   console.log(row);
   properties = {
     "metadata": getMetadata(row),
-    "color": getColor(row.Purpose),
-    "opacity": "0.4"
+    "color": getColor(row["What's the purpose of riding this route?"]),
+    "opacity": "0.5"
   };
   return properties;
 }
 
 // Returns a string for displaying in the popup.
 function getMetadata(row) {
-  firstname = row.Name.split(' ')[0];
+  firstname = row["What's your name?"].split(' ')[0];
   date = row.Timestamp.split(' ')[0];
-  hash = md5(row.Email);
+  hash = md5(row['And your e-mail address?']);
   gravatar = "http://www.gravatar.com/avatar/" + hash;
-  string = '<img src="' + gravatar + '" id="gravatar"><p>Submitted by <strong>' + firstname + '</strong> on <strong>' + date + '</strong></p>' + '<strong>' + firstname + '</strong> rides this route for <strong>' + row.Purpose + '</strong> and the trip takes about <strong>' + row.Duration + '</strong>.</p><p><strong>Comments:</strong> ' + row.Comments + '</strong>';
-  if (row.StartTime !== null) {
-    string += '<p><strong>Typical starting time:</strong> ' + row.StartTime + '</p>';
+  string = '<img src="' + gravatar + '" id="gravatar"><p>Submitted by <strong>' + firstname + '</strong> on <strong>' + date + '</strong></p>' + '<strong>' + firstname + '</strong> rides this route for <strong>' + row["What's the purpose of riding this route?"] + '</strong> and the trip takes about <strong>' + row["How many minutes is this route, approximately?"] + '</strong>.</p><p><strong>Comments:</strong> ' + row['What are your comments on this route?']+ '</strong>';
+  if (row["What time do you usually start out on this route?"] !== null) {
+    string += '<p><strong>Typical starting time:</strong> ' + row["What time do you usually start out on this route?"] + '</p>';
   }
 return string;
 }
